@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 
 const components: {} = {
   p: (p: { children: string }) => {
-    return <p className="my-6 text-lg">{p.children}</p>
+    return <p className="my-6 text-md text-zinc-50">{p.children}</p>
   },
   a: (a: { children: string; href: string }) => {
     return (
@@ -38,7 +38,7 @@ const PostBody: React.FC<{ content: string }> = ({ content }) => {
   return (
     <ReactMarkdown
       components={components}
-      className="flex flex-col gap-y-4 py-12">
+      className="flex flex-col gap-y-2 py-2">
       {content}
     </ReactMarkdown>
   )

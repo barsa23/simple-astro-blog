@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets'
+import Card from '../components/Card.astro'
+import Card2 from '@components/Card2.astro'
+import { getAllPosts } from '../lib/cosmic'
+
+const data = await getAllPosts()
+
+export interface Post {
+  title: string
+  slug: string
+ 
+  metadata: {
+    cover_image: {
+        url: string
+        imgix_url: string
+      }
+    excerpt: string
+    tags: {
+      title: string
+      metadata: {
+        color?: string
+      }
+    }[]
+  }
+}
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docudddment</title>
+</head>
+<body>
+    <div class="z-50 hidden bg-white dark:bg-neutral-900 lg:flex md:w-72 md:flex-col md:fixed md:inset-y-0"> <div class="flex flex-col flex-1 relative min-h-0 border-r bg-white dark:bg-neutral-900 dark:border-fuchsia-700"> 
+    <div class="flex flex-col flex-1 pt-8 pb-4 overflow-y-auto"> 
+    <div class="flex items-center flex-shrink-0 pl-8 text-black"> 
+    <a href="/" class="group block flex-shrink-0 cursor-pointer"> 
+    <span class="inline-flex items-center text-emerald-600 dark:text-white gap-3 group-hover:opacity-80"> <span> <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto" viewBox="0 0 232 232" fill="none"> <path d="M166.524 51.4683L116.367 101.625L65.5235 51.4683L116.367 0.62434L166.524 51.4683ZM231.11 116.054L180.953 166.898L130.796 116.054L180.953 65.8969L231.11 116.054ZM101.939 116.054L51.0948 166.898L0.250934 116.054L51.0948 65.8969L101.939 116.054ZM166.524 181.326L116.367 231.483L65.5235 181.326L116.367 130.482L166.524 181.326Z" fill="currentColor"></path> </svg> </span> 
+    <span class="font-semibold text-xl"> ProFolioX</span> </span> 
+
+    <div class="flex items-center mt-12"> 
+    <div> <img class="inline-block h-9 w-9 ring-1 ring-black dark:ring-white/10 grayscale filter rounded-full" src="https://res.cloudinary.com/tammymetzler/image/upload/c_scale,w_100/v1677614976/logokkk_m7f4kx.ico" alt=""> </div> <div class="ml-3"> <p class="text-sm font-medium text-neutral-900 dark:text-white group-hover:opacity-80">Michael Andreuzza</p> 
+        <p class="text-xs font-medium text-neutral-500 dark:text-white group-hover:opacity-80">
+        UI Designer - Developer</p> 
+    </div> </div> </a> </div> 
+
+    <nav class="flex-1 mt-12">
+    <div> 
+    <div class="p-8 space-y-4"> 
+    <a href="/" class="flex items-center text-sm text-neutral-400 hover:text-blue-400 dark:text-neutral-50 group duration-200 transform gap-3"> <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4"> <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path> </svg> </span>
+        Home
+        </a> <a href="/work" class="flex items-center text-sm text-neutral-400 hover:text-blue-400 dark:text-neutral-50 group duration-200 transform gap-3"> <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+            <path fill="#0070f3" d="
+              M70,16 c0,20,-10,30,-20,30 c10,0,20,10,20,30 c0,-20,10,-30,20,-30 c-10,0,-20,-10,-20,-30 z M30,0 c0,20,-10,30,-20,30 c10,0,20,10,20,30 c0,-20,10,-30,20,-30 c-10,0,-20,-10,-20,-30 z M43,42 c0,20,-10,30,-20,30 c10,0,20,10,20,30 c0,-20,10,-30,20,-30 c-10,0,-20,-10,-20,-30 z
+            "></path>
+          </svg>
+        Work
+        </a> <a href="/blog" class="flex items-center text-sm text-neutral-400 hover:text-blue-400 dark:text-neutral-50 group duration-200 transform gap-3"> <span><svg class="w-8 h-8" width="256px" height="256px" viewBox="-30.72 -30.72 1085.44 1085.44" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="0.01024"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M283.9 136.9l10.9 119.9-131.3 55 86.2 50.2 91.5-54.8 89.6-24.4 65.1 13.5 16.1-66.1s-51.8-57.5-116.7-80.3-111.4-13-111.4-13z" fill="#95C751"></path><path d="M341.2 307.2C273 335 145.4 459.5 204.8 637.1S376.3 888.6 412 894c35.7 5.4 87.6-31.5 116.4-31.5s53.8 34.7 89.5 32 112.8-32.5 149.7-93 117.1-213.9 92.2-328.1c-24.9-114.2-132.3-170.6-181.1-179.8s-132.3 6.3-156.2 5.6c-23.9-0.7-84.6-15.3-116.1-8.5-31.4 6.7-65.2 16.5-65.2 16.5z" fill="#F75252"></path><path d="M861.2 471.3c-24.9-114.2-132.3-170.6-181.1-179.8-48.8-9.2-132.3 6.3-156.2 5.6s-84.6-15.3-116.1-8.5c-31.5 6.7-65.2 16.5-65.2 16.5-68.2 27.7-195.9 152.2-136.4 329.9s171.5 251.4 207.1 256.9c35.7 5.4 87.6-31.5 116.4-31.5s53.8 34.7 89.5 32c35.8-2.7 112.8-32.5 149.7-93 37-60.5 117.2-213.9 92.3-328.1zM703 735c-31.4 51.5-96.8 76.7-127.3 79.1-30.4 2.3-51.7-27.2-76.1-27.2-24.5 0-68.7 31.4-99 26.7-30.3-4.6-125.5-67.3-176.1-218.4-50.6-151.1 57.9-257 115.9-280.6 0 0 28.7-8.3 55.5-14 26.7-5.7 78.4 6.6 98.7 7.3 20.3 0.6 91.3-12.6 132.8-4.8 41.5 7.8 132.8 55.8 154 152.9 21.2 97.1-47.1 227.5-78.4 279z" fill="#EF3A3A"></path><path d="M499.7 350.6s14.7-115.5 27.3-140.7 23.1-33.4 23.1-33.4l69.1 4.1 8.9 26s-70.8 85.1-81.3 105.2-13.8 44.5-13.8 44.5l-33.3-5.7z" fill="#F2F5FB"></path><path d="M819.9 371.3c-50.2-61.4-127.1-99.5-200.6-99.5-11.9 0-22.9 1.4-33.4 3.5 25.7-35.1 52.4-62.2 52.9-62.6 4.4-4.4 5.3-11.1 2.2-16.5 0 0-15.4-31.3-26.5-31.3l-76.2-0.5c-4.5 0-8.8 2.2-11.3 6-8.4 12.3-15.3 26-21 40.1-85.4-92.9-218.4-94.1-224.3-94.1-7.1 0-13.1 5.5-13.7 12.6-0.3 3.7-4.9 64.5 14.2 121-31.8 6.6-101.3 24.1-133.4 55.2-3 2.9-4.5 6.9-4.1 11 0.4 4.1 2.6 7.8 6 10.2 2.1 1.4 45.2 30.3 87 43.9-0.3 0.3-0.6 0.6-0.8 1-50.9 62.3-70.1 140.8-53.8 221.1 35.1 173.8 149.2 315.1 254.4 315.1 22.2 0 42.5-6.8 60.4-20.2 19.1-14.3 41.9-14.3 61 0 17.9 13.4 38.2 20.2 60.4 20.2 105.2 0 219.3-141.4 254.4-315.1 16.2-80.3-2.9-158.8-53.8-221.1zM545.6 191.8h62.6l3.8 9.1c-14.8 15.7-48.5 53.5-72.8 95.4 0 0.1-0.1 0.1-0.1 0.1-0.2 0.4-0.4 0.8-0.7 1.2-1.5 2.6-2.9 5.1-4.3 7.7-0.7 1.2-1.4 2.5-2 3.7-1.7 3.3-3.3 6.6-4.9 10-0.2 0.4-0.4 0.9-0.6 1.3-3.4 7.4-6.4 14.8-8.8 22.1-3.4-0.4-6.8-1-10.1-1.8 0.5-10.1 1.5-24.1 3.6-40.2v-0.2c4.6-33.6 14.1-75.7 34.3-108.4z m-250.8-47.3c35.8 2.9 136.5 17.6 198.9 93.7 0.6 0.8 1.5 1.2 2.2 1.8-3.8 13.4-6.7 26.8-9 39.5-9.1-3.1-18.9-5.2-29.2-6.4L380 189.7c-5.2-5.6-13.8-5.8-19.4-0.7-5.5 5.2-5.8 13.8-0.7 19.4l60 64.3c-27.3 2.2-54.7 9.4-80.8 21-41.3-40.5-44.7-118.1-44.3-149.2z m-1.7 131.3c3.3 6.4 6.8 12.7 11 18.7l-55.2 3.4c-7.6 0.5-13.3 7-12.8 14.5 0.5 7.3 6.5 12.8 13.7 12.8h0.9l37.9-2.4c-10.4 7.6-20.4 15.9-29.8 24.9-26.6-6-57.8-22.8-76.4-33.8 31-19.4 82.5-32.6 110.7-38.1zM846.9 587c-35.4 175.4-146.3 293.2-227.6 293.2-16.3 0-30.7-4.8-44-14.7-14.5-10.8-30.7-16.2-46.9-16.2s-32.4 5.4-46.9 16.2c-13.2 9.9-27.6 14.7-44 14.7-81.3 0-192.2-117.8-227.6-293.2-14.6-72.1 2.5-142.5 48.2-198.3 45.1-55.2 113.9-89.4 179.4-89.4 17.4 0 32.4 2.5 45.5 7.7 0 0.3-0.1 0.6-0.1 1-0.5 4.4-0.9 8.7-1.3 12.7 0 0.4-0.1 0.7-0.1 1.1-0.2 2.6-0.4 5.2-0.6 7.6-4.7-3.3-8.8-7-12.1-11.2-4.6-6-13.2-7.1-19.2-2.5s-7.1 13.2-2.5 19.2c9.7 12.7 24.4 22.5 41.5 28.8 0.2 0.1 0.3 0.2 0.5 0.3 0.2 0.1 0.5 0.1 0.8 0.2 5.7 2 11.6 3.6 17.7 4.7 0.4 0.1 0.7 0.1 1.1 0.2 6.1 1.1 12.4 1.7 18.8 1.9h0.4c0.8 0 1.6 0.1 2.4 0.1 33.4 0 63.9-12.7 81.5-34 4.8-5.8 4-14.5-1.8-19.3-5.8-4.8-14.5-4-19.3 1.8-9.4 11.4-25.3 19.4-43.4 22.6 0.6-1.6 1.2-3.2 1.9-4.9 1.1-2.7 2.4-5.4 3.7-8.1 0.6-1.3 1.2-2.7 1.9-4 1.5-3 3.2-6.2 5-9.3 0.5-0.8 0.9-1.6 1.4-2.5 15.7-9.4 34.7-13.9 58.1-13.9 65.5 0 134.2 34.3 179.4 89.4 45.6 55.6 62.7 126 48.2 198.1z" fill="#004364"></path><path d="M700.2 388.3m-15.8 0a15.8 15.8 0 1 0 31.6 0 15.8 15.8 0 1 0-31.6 0Z" fill="#004364"></path><path d="M757.3 431.7m-15.8 0a15.8 15.8 0 1 0 31.6 0 15.8 15.8 0 1 0-31.6 0Z" fill="#004364"></path><path d="M688.2 457.6m-15.8 0a15.8 15.8 0 1 0 31.6 0 15.8 15.8 0 1 0-31.6 0Z" fill="#004364"></path><path d="M427.8 824.4m-15.8 0a15.8 15.8 0 1 0 31.6 0 15.8 15.8 0 1 0-31.6 0Z" fill="#004364"></path><path d="M357 787.8m-15.8 0a15.8 15.8 0 1 0 31.6 0 15.8 15.8 0 1 0-31.6 0Z" fill="#004364"></path></g></svg> </span>
+        Articles
+        </a> <a href="/uses" class="flex items-center text-sm text-neutral-400 hover:text-blue-400 dark:text-neutral-50 group duration-200 transform gap-3"> <svg class="w-8 h-8" viewBox="-1 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title> spiral [#30]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-381.000000, -8039.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path fill="#0070f3" d="M336.622775,7895.01452 C333.022714,7895.3213 329.929083,7892.89808 329.177444,7889.58357 C328.445822,7886.35728 330.675718,7883.02874 333.977526,7883.00969 C336.468644,7882.99565 338.540405,7884.8043 338.941747,7887.1814 C339.245004,7888.98202 338.148072,7890.82275 336.33453,7891.01324 C334.529995,7891.20273 333.0067,7889.7911 333.0067,7888.02256 C333.0067,7887.46914 333.455081,7887.01999 334.007551,7887.01999 C334.560021,7887.01999 335.008402,7887.46914 335.008402,7888.02256 C335.008402,7888.57598 335.456783,7889.02513 336.009253,7889.02513 C336.561723,7889.02513 337.010104,7888.57598 337.010104,7888.02256 C337.010104,7886.25402 335.486809,7884.84239 333.682275,7885.03188 C331.868733,7885.22337 330.7718,7887.0631 331.075058,7888.86372 C331.476399,7891.24183 333.548161,7893.04947 336.039279,7893.03543 C339.341086,7893.01638 341.570982,7889.68784 340.83936,7886.46155 C339.941597,7882.49938 335.695987,7879.81147 331.240198,7881.5369 C328.964263,7882.41716 327.340883,7884.52758 327.062646,7886.95582 C326.472144,7892.11507 330.230339,7896.53241 335.138513,7897.00463 C335.637937,7897.05275 336.009253,7897.49088 336.009253,7897.99417 C336.009253,7898.5917 335.488811,7899.05489 334.894305,7898.99474 C329.388624,7898.44031 325.07996,7893.82346 325.000893,7888.18097 C324.940842,7883.91401 327.915371,7880.06111 332.086918,7879.1989 C337.477502,7878.08404 342.265573,7881.79657 342.935142,7886.81546 C343.469596,7890.82075 340.642192,7894.67164 336.622775,7895.01452" id="-spiral-[#30]"> </path> </g> </g> </g> </g></svg></span>
+        In use
+        </a> <a href="/store" class="flex items-center text-sm text-neutral-400 hover:text-blue-400 dark:text-neutral-50 group duration-200 transform gap-3"> <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4"> <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z"></path> </svg> </span>
+        Store</a> 
+      
+    </div>  </div></nav> </div>  </div> </div>
+        
+        
+        
+    
+        
+        <div class="flex-1 mx-auto bg-neutral-900">  
+            
+    
+        
+        
+        <section> 
+        <div class="mx-auto max-w-7xl px-8 py-12 sm:py-24"> 
+        <div class="mx-auto max-w-2xl"> 
+        <h2 class="text-2xl font-medium tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+        Latest Articles</h2> 
+        <p class="mt-4 mb-6 text-neutral-400 dark:text-neutral-300">
+        Check out my newest blog posts and discover the latest insights and
+                  trends in web development and UI design. From essential skills and top
+                  frameworks to user-centered design and responsive web design.</p> 
+        
+        <!-- <ul class="grid gap-8 md:grid-row-2">
+                    {
+                      data.map((post: Post) => (
+
+                      
+                        <Card 
+                           
+                          title={post.title}
+                          href={post.slug}
+                          body={post.metadata.excerpt}
+                          tags={post.metadata.tags.map((tag) => tag)}
+                        />
+                      ))
+                    }
+                  </ul> -->
+
+                  <ul class="grid gap-8 md:grid-row-2">
+                    {
+                      data.map((post: Post) => (
+
+                      
+                        <Card2
+                        
+                            img={post.metadata.cover_image.imgix_url}
+                        title={post.title}
+                          href={post.slug}
+                          body={post.metadata.excerpt}
+                          tags={post.metadata.tags.map((tag) => tag)}
+                        />
+                      ))
+                    }
+                  </ul>
+  </div> </div> </section>  </div>
+        
+</body>
+</html>
+

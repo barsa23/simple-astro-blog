@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets'
+
+
+export interface Props {
+  title: string
+  body: string
+  href: string
+img: string
+  
+  tags: {
+    title: string
+    metadata: {
+        color?: string
+    }
+  }[]
+}
+
+const { href, title, body, tags, img} = Astro.props
+---
+
+<li class="rounded-md bg-transparent  grid grid-row-2  gap-x-10">
+
+    <Image
+    src={img}
+    format="webp"
+    width={200}
+    height={175}
+    quality={50}
+    alt={`alt`}
+    class={'rounded-md  border-yellow-200 '}
+  />
+    
+  <a href={`/blog/${href}`}>
+    <div class="flex h-full flex-col  mt-4  border-yellow-200 ">
+      <h2 class=" text-xl text-white font-semibold">
+        {title}
+      </h2>
+      <p class="text-white mb-2 text-xs">
+        {body}
+      </p>
+      {
+        tags && (
+          <div class="flex flex-wrap gap-1">
+            {tags?.map(
+              (tag: { title: string; metadata: { color?: string } }) => (
+                <span
+                  class="w-fit whitespace-nowrap rounded-md bg-black py-1 px-2 text-xs font-regular text-white shadow transition"
+                  style={`background-color: ${tag.metadata?.color}`}>
+                  {tag.title}
+                </span>
+              )
+            )}
+          </div>
+        )
+      }
+    </div>
+  </a>
+</li>

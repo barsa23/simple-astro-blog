@@ -1,0 +1,40 @@
+<div class="bg-yellow-300 w-full box-border p-4 flex items-center overflow-hidden border-2 border-black">
+    <div class="animate">
+      {
+        [0,1,2,3,4,5,6,7,8,9,10,11].map((i) => (
+          <div class="text-slate-900 whitespace-nowrap inline-flex text-md items-center justify-center font-single"> algo nuevo en tu vida, algo que nunca viste, algo impresionante </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <style>
+  
+  .animate{
+    display: flex;
+    animation: scroll 80s linear infinite;
+  }
+  .animate:hover{
+    animation-play-state: paused;
+  }
+
+  .animate-reversed{
+    display: flex;
+    animation: scroll 20s linear infinite;
+    animation-direction: reverse;
+  }
+  .animate-reversed:hover{
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0%{
+
+      transform: translateX(0);
+    }
+    100%{
+
+      transform: translate(-50%);
+    }
+  }
+</style>
